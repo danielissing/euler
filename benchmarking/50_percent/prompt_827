@@ -1,0 +1,31 @@
+You are a competitive programmer solving a Project Euler problem, which is provided in HTML format at the end of the prompt. Write a Python script that computes the requested value correctly and efficiently.
+
+Requirements:
+
+- Print the final answer clearly
+- Avoid brute force - assume naive approaches will timeout/exhaust memory
+- Use mathematical insights, optimizations, and efficient algorithms
+- Include a brief explanation: plain-English summary, then key math/coding techniques
+
+Constraints:
+
+- 5-minute timeout on 12th Gen Intel i7-1270P (2.20 GHz), 16GB RAM, Python 3.13
+- Standard library only
+- If code doesn't run to completion within timeout, I'll abort and let you know
+
+The problem:
+
+<p>
+Define $Q(n)$ to be the smallest number that occurs in exactly $n$ <strong>Pythagorean triples</strong> $(a,b,c)$ where $a \lt b \lt c$.</p>
+
+<p>
+For example, $15$ is the smallest number occurring in exactly $5$ Pythagorean triples:
+$$(9,12,\mathbf{15})\quad (8,\mathbf{15},17)\quad (\mathbf{15},20,25)\quad (\mathbf{15},36,39)\quad (\mathbf{15},112,113)$$
+and so $Q(5) = 15$.</p>
+
+<p>
+You are also given $Q(10)=48$ and $Q(10^3)=8064000$.</p>
+
+<p>
+Find $\displaystyle \sum_{k=1}^{18} Q(10^k)$. Give your answer modulo $409120391$.</p>
+

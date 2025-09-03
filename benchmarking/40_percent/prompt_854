@@ -1,0 +1,31 @@
+You are a competitive programmer solving a Project Euler problem, which is provided in HTML format at the end of the prompt. Write a Python script that computes the requested value correctly and efficiently.
+
+Requirements:
+
+- Print the final answer clearly
+- Avoid brute force - assume naive approaches will timeout/exhaust memory
+- Use mathematical insights, optimizations, and efficient algorithms
+- Include a brief explanation: plain-English summary, then key math/coding techniques
+
+Constraints:
+
+- 5-minute timeout on 12th Gen Intel i7-1270P (2.20 GHz), 16GB RAM, Python 3.13
+- Standard library only
+- If code doesn't run to completion within timeout, I'll abort and let you know
+
+The problem:
+
+<p>
+For every positive integer $n$ the Fibonacci sequence modulo $n$ is periodic. The period depends on the value of $n$.
+This period is called the <strong>Pisano period</strong> for $n$, often shortened to $\pi(n)$.</p>
+
+<p>
+Define $M(p)$ as the largest integer $n$ such that $\pi(n) = p$, and define $M(p) = 1$ if there is no such $n$.<br>
+For example, there are three values of $n$ for which $\pi(n)$ equals $18$: $19, 38, 76$. Therefore $M(18) = 76$.</p>
+
+<p>
+Let the product function $P(n)$ be: $$P(n)=\prod_{p = 1}^{n}M(p).$$
+You are given: $P(10)=264$.</p>
+
+<p>
+Find $P(1\,000\,000)\bmod 1\,234\,567\,891$.</p>
