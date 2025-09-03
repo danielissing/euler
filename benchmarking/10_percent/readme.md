@@ -23,7 +23,7 @@ Then, define $S(k)$ as the sum of $T(n)$ over **all k-digit numbers**. For examp
 
 ---
 
-## 2. High-level solution idea
+## 2. High-level strategy
 
 Instead of checking every single number, group numbers according to the digits they contain. 
 
@@ -43,8 +43,8 @@ Thus, we just need to:
 
 If the digit counts are $(c_0, c_1, \ldots, c_9)$ with $\sum c_i = k$, then:
 
-- Ignoring the “no leading zero” restriction, there are $\frac{k!}{c_0! \, c_1! \cdots c_9!}$ total permutations.
-- With the restriction, there are $\frac{(k-1)!}{(c_a-1)! \prod_{d!=a} c_d!}$ for each nonzero digit $a$.
+- Ignoring the “no leading zero” restriction, there are $$\frac{k!}{c_0! \, c_1! \cdots c_9!}$$ total permutations.
+- With the restriction, there are $$\frac{(k-1)!}{(c_a-1)! \prod_{d!=a} c_d!}$$ for each nonzero digit $a$.
 - $P(c)$ can be calculated as the sum of all such permutation for all possible leading digits $a$ (i.e. 1-9)
 
 ---

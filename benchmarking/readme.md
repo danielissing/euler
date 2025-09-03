@@ -1,3 +1,22 @@
+## List of selected problems
+
+All problems uploaded after May 2022 and not yet solved and uploaded on https://www.ivl-projecteuler.com/home
+
+
+| Difficulty | Problem |
+|------------|---------|
+| 5% | [Exhausting a Colour](https://projecteuler.net/problem=938) |
+| 10% | [Larger Digit Permutation](https://projecteuler.net/problem=862) |
+| 20% | [XOR-Equation A](https://projecteuler.net/problem=877) |
+| 30% | [Beans in Bowls](https://projecteuler.net/problem=839) |
+| 40% | [Pisano Periods 2](https://projecteuler.net/problem=854) |
+| 50% | [Pythagorean Triple Occurrence](https://projecteuler.net/problem=827) |
+| 60% | [Beautiful Graphs](https://projecteuler.net/problem=857) |
+| 70% | [Rational Blancmange](https://projecteuler.net/problem=889) |
+| 80% | [Irregular Star Polygons](https://projecteuler.net/problem=842) |
+| 90% | [Total Permutation Powers](https://projecteuler.net/problem=903) |
+| 100% | [Dynamical Polynomials](https://projecteuler.net/problem=812) |
+
 ## Performance of AI Models on Project Euler Problems
 
 | Difficulty | Claude Opus 4.1                                       | ChatGPT 5 Pro                                                        | Gemini 2.5 Pro                                                        |
