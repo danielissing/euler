@@ -41,53 +41,39 @@ Let $X(N)$ be the XOR of all $b$ values from such solutions.
 1. **Carryless multiplication as polynomials:**  
    Represent integers as polynomials in $x$ over GF(2). Then  
 
-   $$
-   a \otimes b = f(x) \cdot g(x) \quad (\text{mod 2 coefficients}).
-   $$  
+   $$a \otimes b = f(x) \cdot g(x) \quad (\text{mod 2 coefficients}).$$  
 
    Example: $7 \otimes 3 \rightarrow (x^2+x+1) \cdot (x +1) \rightarrow x^3 +1 (\text{after mod 2 on coefficients)} \rightarrow1001_2 = 9.$  
 
 2. **Norm form:**  
    Notice that the equation we want to solve can be expressed in polynomial form as:
 
-   $$ 
-   f(x)^2+xf(x)g(x)+g(x)^2=1+x^2
-   $$
+   $$f(x)^2+xf(x)g(x)+g(x)^2=1+x^2$$
 
    (e.g. 5 corresponds to the polynomial $x^2+1$). This looks like a quadratic form, so let's define $t$ so that it satisfies $t^2 + x t + 1 = 0$. We know that the "norm" $N(y) =y(t) y(t^{-1})$ is a standard way to produce quadratic forms, so let's compute $N(f+tg)$, which gives
   
-   $$ 
-   f^2+fg(t+t^{-1}) +g^2 = f^2 +xfg +g^2 \text{ (based on our definition of t).}
-   $$
+   $$f^2+fg(t+t^{-1}) +g^2 = f^2 +xfg +g^2 \text{ (based on our definition of t).}$$
 
    Hence, 
 
-   $$
-   N(f + t g) = (1+x)^2.
-   $$
+   $$N(f + t g) = (1+x)^2.$$
 
 3. **Recurrence for coefficients:**  
-   Since $f$ and $g$ both have to be divisible by $(1+x)$, let's define 
-
-   $$
-   f = (1+x) A_k, \quad g = (1+x) B_k.
-   $$
+   Since $f$ and $g$ both have to be divisible by $(1+x)$, let's define
+   
+   $$f = (1+x) A_k, \quad g = (1+x) B_k.$$
 
    Substituting this into the norm equation and simplifying shows that $N(A_k +tB_k) = 1$. Only monomials have norm 1, so we set $t^n = A_n(x) + t B_n(x)$. This can be used to derive the following recurrence relation (using the definition of t):
 
-   $$
-   A_{n+1} = B_n, \quad B_{n+1} = A_n + x B_n
-   $$
+   $$A_{n+1} = B_n, \quad B_{n+1} = A_n + x B_n$$
 
    with $A_0=1, B_0=0$.
 
 
-5. **Extracting $b_k$ values:**  
+4. **Extracting $b_k$ values:**  
    Use 
 
-   $$
-   b_k = B_k \oplus (B_k \ll 1).
-   $$
+   $$b_k = B_k \oplus (B_k \ll 1).$$
 
    Here $\ll$ is a binary left shift.
 
