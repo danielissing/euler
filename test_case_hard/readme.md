@@ -1,17 +1,18 @@
 # Overview [not reviewed yet]
 
----
-
 **Problem link:** [Project Euler Problem 791](https://projecteuler.net/problem=791).
+
 This file describe `solution_chat.py`. Neither Gemini nor Claude were able to solve this problem.
 ---
 
 ## 1. Problem statement
 
 For integers $1 \le a \le b \le c \le d \le n$, set 
-$$ \bar{x} = \dfrac{a+b+c+d}{4} $$
+$$
+\bar{x} = \dfrac{a+b+c+d}{4}
+$$
 and the variance be
-$$ \dfrac{1}{4}\sum_{x\in$$a,b,c,d$$}(x-\bar{x})^2$$.
+$$ \dfrac{1}{4}\sum_{x\in (a,b,c,d)}(x-\bar{x})^2 $$.
 
 Define $S(n)$ as the **sum of all quadruples** $(a,b,c,d)$ satisfying
 “average = twice the variance”, i.e.
@@ -125,7 +126,7 @@ $$
 
 ## 4. Techniques used to increase algorithmic efficiency
 
-- **Integer‑only arithmetic:** All formulas use exact integers with $\operatorname{isqrt}$; no floating point is needed.
+- **Integer‑only arithmetic:** All formulas use exact integers with $math.isqrt$; no floating point is needed.
 - **Range splitting for $t$:**
   For each $A$, the threshold values of $T(A,t)$ where $U$ or $R$ reaches $A$ create three regimes:
   1. **Both sides saturated:** $L_{\text{pos}}=L_{\text{neg}}=A$.
