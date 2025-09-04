@@ -1,7 +1,7 @@
-# Overview
+# Overview [not reviewed yet]
 
 **Problem link:** [Project Euler Problem
-869](https://projecteuler.net/problem=869)
+827](https://projecteuler.net/problem=827)
 
 ------------------------------------------------------------------------
 
@@ -100,10 +100,3 @@ Sum $Q(10^k)$ for $k=1,\dots,18$.
 -   **Logarithmic comparison:** Compare candidates by $\log N$ instead
     of building full big integers; compute final result modulo
     $409120391$ with modular exponentiation.
-
-------------------------------------------------------------------------
-
-✅ **Final Answer:**\
-$$
-\sum_{k=1}^{18} Q(10^k) \equiv 397289979 \pmod{409120391}.
-$$
