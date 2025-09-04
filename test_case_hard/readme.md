@@ -11,7 +11,7 @@ This file describe `solution_chat.py`. Neither Gemini nor Claude were able to so
 For integers $1 \le a \le b \le c \le d \le n$, set 
 $$ \bar{x} = \dfrac{a+b+c+d}{4} $$
 and the variance be
-$$ \dfrac{1}{4}\sum_{x\in\{a,b,c,d\}}(x-\bar{x})^2$$.
+$$ \dfrac{1}{4}\sum_{x\in$$a,b,c,d$$}(x-\bar{x})^2$$.
 
 Define $S(n)$ as the **sum of all quadruples** $(a,b,c,d)$ satisfying
 “average = twice the variance”, i.e.
@@ -45,7 +45,7 @@ Task: compute $S(10^8) \pmod{433494437}$.
 ## 3. The math behind the solution
 
 ### Variance condition $\Longleftrightarrow$ pairwise squares
-Let $x_1,x_2,x_3,x_4\in\{a,b,c,d\}$ with mean $\mu$.
+Let $x_1,x_2,x_3,x_4\in$$a,b,c,d$$$ with mean $\mu$.
 Using $\sum_{i<j}(x_i-x_j)^2 = 4\sum_i (x_i-\mu)^2$, the condition
 $\mu = 2\cdot \mathrm{Var}$ becomes
 $$
@@ -117,7 +117,7 @@ A\ge 0,\qquad t\ge A,\qquad t^2+t \le 2n - (A^2 + A). \tag{10}
 $$
 Finally, enforcing $a\ge 1$ eliminates exactly the $a=0$ cases, which occur at
 $$
-(A,t,G)\in\{(0,1,0),\ (1,1,0),\ (1,1,1)\}.
+(A,t,G)\in$$(0,1,0),\ (1,1,0),\ (1,1,1)$$.
 $$
 (When present, subtract their contributions $2(A^2+t^2+G^2)$ once.)
 
