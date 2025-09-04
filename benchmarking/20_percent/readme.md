@@ -40,16 +40,24 @@ Let $X(N)$ be the XOR of all $b$ values from such solutions.
 
 1. **Carryless multiplication as polynomials:**  
    Represent integers as polynomials in $x$ over GF(2). Then  
-   $$a \otimes b = f(x) \cdot g(x) \quad (\text{mod 2 coefficients}).$$  
+   $$
+   a \otimes b = f(x) \cdot g(x) \quad (\text{mod 2 coefficients}).
+   $$  
    Example: $7 \otimes 3 \rightarrow (x^2+x+1) \cdot (x +1) \rightarrow x^3 +1 (\text{after mod 2 on coefficients)} \rightarrow1001_2 = 9.$  
 
 2. **Norm form:**  
    Notice that the equation we want to solve can be expressed in polynomial form as:
-   $$ f(x)^2+xf(x)g(x)+g(x)^2=1+x^2 $$
+   $$ 
+   f(x)^2+xf(x)g(x)+g(x)^2=1+x^2
+   $$
    (e.g. 5 corresponds to the polynomial $x^2+1$). This looks like a quadratic form, so let's define $t$ so that it satisfies $t^2 + x t + 1 = 0$. We know that the "norm" $N(y) =y(t) y(t^{-1})$ is a standard way to produce quadratic forms, so let's compute $N(f+tg)$, which gives
-   $$ f^2+fg(t+t^{-1}) +g^2 = f^2 +xfg +g^2 \text{ (based on our definition of t).}$$
+   $$ 
+   f^2+fg(t+t^{-1}) +g^2 = f^2 +xfg +g^2 \text{ (based on our definition of t).}
+   $$
    Hence, 
-   $$N(f + t g) = (1+x)^2.$$
+   $$
+   N(f + t g) = (1+x)^2.
+   $$
 
 3. **Recurrence for coefficients:**  
    Since $f$ and $g$ both have to be divisible by $(1+x)$, let's define 
