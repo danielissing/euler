@@ -2,8 +2,7 @@
 
 ---
 
-**Problem link:** [Project Euler Problem 791](https://projecteuler.net/problem=791)  
-
+**Problem link:** [Project Euler Problem 791](https://projecteuler.net/problem=791).
 This file describe `solution_chat.py`. Neither Gemini nor Claude were able to solve this problem.
 ---
 
