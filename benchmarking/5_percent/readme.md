@@ -36,7 +36,7 @@ We can think of the game as a race between "RR" and "RB" with weights $(r-1):(2b
 
 Embed the process in continuous time with independent exponential clocks so that:
 
-$$S_R = \sum_{i=1}^{x}\operatorname{Exp}(2i-1), \qquad S_B = \sum_{j=1}^{B}\operatorname{Exp}(2j) $$
+$$S_R = \sum_{i=1}^{x}\exp(2i-1), \qquad S_B = \sum_{j=1}^{B}\exp(2j) $$
 
 ### (b) ODE solution
 
