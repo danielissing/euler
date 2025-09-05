@@ -9,13 +9,15 @@
 For every positive integer $n$, the Fibonacci sequence modulo $n$ is periodic; the period is the **Pisano period** $\pi(n)$.
 Define $M(p)$ as the largest integer $n$ such that $\pi(n) = p$ (and set $M(p)=1$ if no such $n$ exists).
 Define the product
+
 $$
 P(N) = \prod_{p=1}^{N} M(p).
 $$
-You are given $P(10)=264$. The task is to compute
-$$
-P(1{,}000{,}000) \bmod 1{,}234{,}567{,}891.
-$$
+
+You are given $P(10)=264$. 
+
+**Task:** Compute
+$P(1{,}000{,}000) \bmod 1{,}234{,}567{,}891.$
 
 ---
 
@@ -40,11 +42,21 @@ Implementation note: Iterate through t = 1, 2, … up to the limit, update the F
 ## 3. The math behind the solution
 
 Let
+
 $$
-A=\begin{pmatrix}1&1\\[2pt]1&0\end{pmatrix},
+A=
+\begin{pmatrix}
+1&1\\ 
+1&0
+\end{pmatrix},
 \qquad
-A^k=\begin{pmatrix}F_{k+1}&F_k\\[2pt]F_k&F_{k-1}\end{pmatrix}.
+A^k=
+\begin{pmatrix}
+F_{k+1}&F_k\\
+F_k&F_{k-1}
+\end{pmatrix}.
 $$
+
 Modulo $n$, the Fibonacci sequence has period dividing $p$ exactly when $A^p\equiv I\pmod n$.
 Analysis of this matrix congruence yields three facts we use:
 
@@ -55,25 +67,34 @@ For $n>2$, $\pi(n)$ is even, so no odd $p$ occur except $p=3$ (realized by $n=2$
 **Maximal modulus at $p=2t$:**
 
 One can show that the largest $n$ with $A^{2t}\equiv I\pmod n$ equals
+
 $$
 \gcd\big(F_{2t},\ F_{2t-1}-1,\ F_{2t+1}-1\big).
 $$
+
 Using identities $F_{2t}=F_tL_t$ and
 $F_{2t\pm1}=F_{t\pm1}^2+F_t^2,$
+
 together with standard $\gcd$ properties of Fibonacci/Lucas numbers, this gcd simplifies to
+
 $$
 \begin{cases}
-F_t, & t\ \text{even},\\[2pt]
+F_t, & t\ \text{even},\\
 L_t, & t\ \text{odd},
 \end{cases}
 $$
+
 and moreover the resulting modulus indeed has **exact** period $2t$.
 
 **Odd-period exception:** 
 
 $\pi(2)=3$ gives $M(3)=2$; for all other odd $p$ we have $M(p)=1$.
 
-Therefore, $$ P(N)\equiv \big(\mathbf{1}_{N\ge 3}\cdot 2\big) \cdot \prod_{t=1}^{\lfloor N/2\rfloor} \big(\,L_t\ \text{if } t\text{ odd, else } F_t\,\big) \pmod{1{,}234{,}567{,}891}. $$
+Therefore, 
+
+$$
+P(N)\equiv \big(\mathbf{1}_{N\ge 3}\cdot 2\big) \cdot \prod_{t=1}^{\lfloor N/2\rfloor} \big(\,L_t\ \text{if } t\text{ odd, else } F_t\,\big) \pmod{1{,}234{,}567{,}891}. 
+$$
 
 ---
 
