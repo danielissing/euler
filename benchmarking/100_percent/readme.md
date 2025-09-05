@@ -3,7 +3,7 @@
 **Problem link:** [Project Euler Problem 812](https://projecteuler.net/problem=812)  
 
 ## 1. **Problem statement**  
-Given a monic integer polynomial $f(x)$, call it *dynamical* if $f(x)$ divides $f(x^2-2)$. Let $S(n)$ be the number of degree-$n$ dynamical polynomials. Examples: $S(2)=6$, $S(5)=58$, $S(20)=122087$. 
+Given a monic integer polynomial $f(x)$, call it *dynamical* if $f(x)$ divides $f(x^2-2)$. Let $S(n)$ be the number of degree- $n$ dynamical polynomials. Examples: $S(2)=6$, $S(5)=58$, $S(20)=122087$. 
 
 **Task:** Compute $S(10{,}000)$ modulo $998244353$.
 
@@ -56,7 +56,7 @@ $$
 
 **Parity factor for $m=1$**
 
-The constraint “$e_1$ even” projects the chain onto even multiplicity:
+The constraint “ $e_1$ even ” projects the chain onto even multiplicity:
 
 $$
 \frac{1}{2}\left(\prod_{t\ge0}\frac{1}{1-q^{2^t}}+\prod_{t\ge0}\frac{1}{1+q^{2^t}}\right).
@@ -75,7 +75,7 @@ where
 
 $$
 A_k=\sum_{s=0}^{v_2(k)} b\!\left(\frac{k}{2^s}\right),\qquad
-b(t)=\#\{\text{odd }m\ge1:\ \varphi(m)=t\}.
+b(t)=num\lbrace\{\text{odd }m\ge1:\ \varphi(m)=t\}\rbrace.
 $$
 
 (We effectively exclude $m=1$ by omitting the contribution at $t=1$.)
@@ -89,7 +89,7 @@ S(n)=\big[q^{\,2n}\big]\ \Big( G_{\mathrm{odd}}(q)\cdot P(q)\Big).
 $$
 
 ## 4. **Techniques used to increase algorithmic efficiency**  
-- **Counting $\varphi$-preimages without scanning $m$.** Exploit multiplicativity $\varphi(p^a)=(p-1)p^{a-1}$ for odd primes to enumerate products of $(p-1)p^{a-1}$ by DFS, obtaining $b(t)=\#\{\text{odd }m:\varphi(m)=t\}$ for all $t\le 2n$, instead of iterating $m$.  
+- **Counting $\varphi$-preimages without scanning $m$.** Exploit multiplicativity $\varphi(p^a)=(p-1)p^{a-1}$ for odd primes to enumerate products of $(p-1)p^{a-1}$ by DFS, obtaining $b(t)=num\lbrace\{\text{odd }m:\varphi(m)=t\}\rbrace$ for all $t\le 2n$, instead of iterating $m$.  
 - **Building the exponents $A_k$ correctly.** For each $k\le 2n$, repeatedly halve $k$ while even and accumulate $b(\cdot)$; never floor-divide by $2$ unless $k$ is divisible by $2$. This enforces the dyadic-chain constraint precisely.  
 - **Euler transform via series $\log$ and $\exp$.** Using $\log\Big(\prod_{k\ge1}(1-q^k)^{-A_k}\Big)\ =\ \sum_{m\ge1}\frac{1}{m}\!\sum_{d\mid m} dA_d\ q^m$, compute the logarithm coefficients $C[m]=\tfrac{1}{m}\sum_{d\mid m}dA_d$ and recover $G_{\mathrm{odd}}(q)=\exp\!\big(\sum_{m\ge1}C[m]q^m\big)$.
 - **Fast power-series arithmetic.** Use NTT-based convolution modulo $998244353$ to support quasi-linear polynomial multiplication, plus Newton-style routines for series inverse/log/exp.  
