@@ -75,13 +75,13 @@ $$
 Let $n=2^k\,n_{\text{odd}}$. Writing $\mathcal{O}(d)$ for the set of orders $ord(\beta)$ that occur as $\alpha ranges$ over elements of order $d$ and $\beta=\alpha^t+\alpha^{-t}$ with $\gcd(t,d)=1$, the attainable **odd periods** for n form the LCM-closure
 
 $$
-\mathcal{L}(n)=\operatorname{LCM\text{-}closure}\Big(\ \bigcup_{d\mid n_{\text{odd}},\ d\text{ odd}}\mathcal{O}(d)\ \Big).
+\mathcal{L}(n)=\text{LCM-closure}\Big(\ \bigcup_{d\mid n_{\text{odd}},\ d\text{ odd}}\mathcal{O}(d)\ \Big).
 $$
 
 Finally the full set of periods for n is
 
 $$
-\big\{1\big\}\ \cup\ \big\{\ 2^e\,L\ :\ L\in\mathcal{L}(n),\ L>1,\ 0\le e\le k\ \big\}\ \cup\ \big\{\ 2^e\ :\ 1\le e\le k,\ 3\mid n_{\text{odd}}\ \big\}.
+\lbrace 1 \rbrace\ \cup\ \lbrace\ 2^e\,L\ :\ L\in\mathcal{L}(n),\ L>1,\ 0\le e\le k\ \rbrace\ \cup\ \lbrace\ 2^e\ :\ 1\le e\le k,\ 3\mid n_{\text{odd}}\ \rbrace.
 $$
 
 (That last set accounts for **pure powers of two**, which appear when the odd component allows $\beta=1$, i.e. the $d=3$ factor is present.)
