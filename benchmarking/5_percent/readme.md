@@ -52,17 +52,17 @@ Hence:
 
 $$P(2x,b) = \int_0^{\infty} f_{S_R}(t) \cdot G_b(t) \, dt = 1 - \mathbb{E}\left[(1 - e^{-2S_R})^b\right]$$
 
-### (c) Enter Beta function
+### (c) Enter Beta functions
 
-Set $U = e^{-2S_R}$, then (for $c > 0$), $\mathbb{E}[e^{-kcZ}] = \frac{1}{1+k/c}$. Setting $\operatorname{Exp}(\lambda) = Z/\lambda$, we find:
+Set $U = e^{-2S_R}$, then (for $c > 0$), $\mathbb{E}[e^{-kcZ}] = \frac{1}{1+k/c}$. Setting $e^{\lambda} = Z/\lambda$, we find:
 
 $$\mathbb{E}[U^k] = \prod_{i=1}^{x}\frac{2i-1}{2i-1+2k} = \frac{\Gamma(x+\frac{1}{2})\Gamma(k+\frac{1}{2})}{\Gamma(\frac{1}{2})\Gamma(x+k+\frac{1}{2})} = \frac{B(k+\frac{1}{2}, x)}{B(\frac{1}{2}, x)}$$
 
-These are exactly the moments of $\operatorname{Beta}(\frac{1}{2}, x)$ on $(0,1)$, so:
+These are exactly the moments of $B(\frac{1}{2}, x)$ on $(0,1)$, so:
 
-$$U \overset{d}{=} \operatorname{Beta}\left(\frac{1}{2}, x\right)$$
+$$U \overset{d}{=} B\left(\frac{1}{2}, x\right)$$
 
-With $U \sim \operatorname{Beta}(\frac{1}{2}, x)$:
+With $U \sim B(\frac{1}{2}, x)$:
 
 $$\mathbb{E}[(1-U)^b] = \frac{B(\frac{1}{2}, x+b)}{B(\frac{1}{2}, x)}$$
 
@@ -73,4 +73,4 @@ $$\boxed{P(2x,b) = 1 - \frac{B(\frac{1}{2}, x+b)}{B(\frac{1}{2}, x)} = 1 - \frac
 
 ## 4. Techniques Used to Increase Algorithmic Efficiency
 
-Not reaaly needed since we found a closed form $O(1)$ expression for $P(R,B)$. Code uses log-Gamma evaluation for numerical stability.
+Not really needed since we found a closed form $O(1)$ expression for $P(R,B)$. Code uses log-Gamma evaluation for numerical stability.

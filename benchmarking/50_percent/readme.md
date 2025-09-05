@@ -29,59 +29,73 @@ triple. The problem reduces to solving a **Diophantine factorization
 condition** and choosing the **smallest integer $N$** consistent with
 it.
 
-Steps: 1. Derive a formula for $f(N)$, the count of triples containing
-$N$. 2. Show that $f(N)$ depends only on prime exponents of $N$ split by
-residue class mod 4. 3. For target $n$, solve a multiplicative factor
-equation, and among all solutions construct the smallest integer $N$. 4.
-Sum $Q(10^k)$ for $k=1,\dots,18$.
+Steps: 
+1. Derive a formula for $f(N)$, the count of triples containing
+$N$. 
+2. Show that $f(N)$ depends only on prime exponents of $N$ split by
+residue class mod 4. 
+3. For target $n$, solve a multiplicative factor
+equation, and among all solutions construct the smallest integer $N$. 
+4. Sum $Q(10^k)$ for $k=1,\dots,18$.
 
 ------------------------------------------------------------------------
 
 ## 3. The math behind the solution
 
--   **Triple parametrization:** Every primitive triple is $$
-    (m^2-n^2,\, 2mn,\, m^2+n^2), \quad m>n, \; \gcd(m,n)=1, \; m-n \text{ odd}.
-    $$
+**1. Triple parametrization:** 
 
--   **Counting appearances of $N$:**
+Every primitive triple is 
+$$
+(m^2-n^2,\, 2mn,\, m^2+n^2), \quad m>n, \; \gcd(m,n)=1, \; m-n \text{ odd}.
+$$
 
-    -   If $N$ is a leg: $$
-        L(N) =
-        \begin{cases}
-          \tfrac{\tau(N^2)-1}{2}, & N \text{ odd}, \\[6pt]
-          \tfrac{\tau(N^2/4)-1}{2}, & N \text{ even},
-        \end{cases}
-        $$ where $\tau$ is the divisor-counting function.
-    -   If $N$ is a hypotenuse: $$
-        C(N) = \tfrac{1}{2}\!\left(\!\prod_{p\equiv 1\pmod{4}} (2\alpha_p+1) - 1\!\right),
-        $$ where
-        $N=2^a \prod_{p\equiv 1(4)} p^{\alpha_p} \prod_{q\equiv 3(4)} q^{\beta_q}$.
+**2. Counting appearances of $N$:**
 
--   **Unification:** With
+If $N$ is a leg: 
+$$
+L(N) =
+\begin{cases}
+  \tfrac{\tau(N^2)-1}{2}, & N \text{ odd}, \\[6pt]
+  \tfrac{\tau(N^2/4)-1}{2}, & N \text{ even},
+\end{cases}
+$$ 
 
-    -   $U=\prod_{q\equiv 3(4)} (2\beta_q+1)$,
-    -   $V=\prod_{p\equiv 1(4)} (2\alpha_p+1)$,
-    -   $M=1$ if $a=0$, else $M=2a-1$ (always odd),
+where $\tau$ is the divisor-counting function.
+If $N$ is a hypotenuse: 
+$$
+C(N) = \tfrac{1}{2}\!\left(\!\prod_{p\equiv 1\pmod{4}} (2\alpha_p+1) - 1\!\right),
+$$
 
-    we obtain the key identity: $$
-    f(N)+1 = \frac{V \, (MU+1)}{2}.
-    $$
+where $N=2^a \prod_{p\equiv 1(4)} p^{\alpha_p} \prod_{q\equiv 3(4)} q^{\beta_q}$.
 
--   **Target equation:** For given $n$, $$
-    V(MU+1) = 2(n+1).
-    $$
+**3. Unification:** 
 
--   **Constructing $Q(n)$:**
+With
 
-    -   Choose an odd divisor $V$ of $n+1$.
-    -   Set $W = \tfrac{2(n+1)}{V}$, then $MU = W-1$.
-    -   Factor $MU$ into $M\cdot U$ with $M$ odd.
-    -   Build the minimal $N$ from:
-        -   exponents $\alpha$ from factorization of $V$ (using primes
-            $1 \pmod 4$),
-        -   exponents $\beta$ from factorization of $U$ (using primes
-            $3 \pmod 4$),
-        -   power of 2 from $M$.
+-   $U=\prod_{q\equiv 3(4)} (2\beta_q+1)$,
+-   $V=\prod_{p\equiv 1(4)} (2\alpha_p+1)$,
+-   $M=1$ if $a=0$, else $M=2a-1$ (always odd),
+
+we obtain the key identity: 
+$$
+f(N)+1 = \frac{V \, (MU+1)}{2}.
+$$
+
+**4. Target equation:** 
+
+For given $n$, $V(MU+1) = 2(n+1).$
+
+**5. Constructing $Q(n)$:**
+
+-   Choose an odd divisor $V$ of $n+1$.
+-   Set $W = \tfrac{2(n+1)}{V}$, then $MU = W-1$.
+-   Factor $MU$ into $M\cdot U$ with $M$ odd.
+-   Build the minimal $N$ from:
+    -   exponents $\alpha$ from factorization of $V$ (using primes
+        $1 \pmod 4$),
+    -   exponents $\beta$ from factorization of $U$ (using primes
+        $3 \pmod 4$),
+    -   power of 2 from $M$.
 
 ------------------------------------------------------------------------
 
