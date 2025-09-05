@@ -45,6 +45,7 @@ equation, and among all solutions construct the smallest integer $N$.
 **1. Triple parametrization:** 
 
 Every primitive triple is 
+
 $$
 (m^2-n^2,\, 2mn,\, m^2+n^2), \quad m>n, \; \gcd(m,n)=1, \; m-n \text{ odd}.
 $$
@@ -52,18 +53,20 @@ $$
 **2. Counting appearances of $N$:**
 
 If $N$ is a leg: 
+
 $$
 L(N) =
 \begin{cases}
-  \tfrac{\tau(N^2)-1}{2}, & N \text{ odd}, \\[6pt]
+  \tfrac{\tau(N^2)-1}{2}, & N \text{ odd}, \\
   \tfrac{\tau(N^2/4)-1}{2}, & N \text{ even},
 \end{cases}
 $$ 
 
 where $\tau$ is the divisor-counting function.
 If $N$ is a hypotenuse: 
+
 $$
-C(N) = \tfrac{1}{2}\!\left(\!\prod_{p\equiv 1\pmod{4}} (2\alpha_p+1) - 1\!\right),
+C(N) = \tfrac{1}{2}\left(\prod_{p\equiv 1\pmod{4}} (2\alpha_p+1) - 1\right),
 $$
 
 where $N=2^a \prod_{p\equiv 1(4)} p^{\alpha_p} \prod_{q\equiv 3(4)} q^{\beta_q}$.
@@ -77,8 +80,9 @@ With
 -   $M=1$ if $a=0$, else $M=2a-1$ (always odd),
 
 we obtain the key identity: 
+
 $$
-f(N)+1 = \frac{V \, (MU+1)}{2}.
+f(N)+1 = \frac{V(MU+1)}{2}.
 $$
 
 **4. Target equation:** 
