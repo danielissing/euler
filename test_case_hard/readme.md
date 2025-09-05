@@ -1,4 +1,4 @@
-# Overview [not reviewed, formatting broken]
+# Overview [not reviewed yet]
 
 **Problem link:** [Project Euler Problem 791](https://projecteuler.net/problem=791).
 
@@ -9,37 +9,47 @@ This file describes `solution_chat.py`. Neither Gemini nor Claude were able to s
 ## 1. Problem statement
 
 For integers $1 \le a \le b \le c \le d \le n$, set
+
 $$
 \bar{x} = \frac{a+b+c+d}{4}
 $$
+
 and let the variance be
+
 $$
-\frac{1}{4}\sum_{x\in\{a,b,c,d\}}(x-\bar{x})^2
+var =\frac{1}{4}\sum_{x\in\{a,b,c,d\}}(x-\bar{x})^2
 $$
-Define $S(n)$ as the **sum of all quadruples** $(a,b,c,d)$ satisfying “average = twice the variance”, i.e.
-$$
-\bar{x} = 2\,\mathrm{Var}
-$$
-Example values: $S(5)=48$ and $S(10^3)=37048340$.  
+
+Define $S(n)$ as the **sum of all quadruples** $(a,b,c,d)$ for which $\bar{x} = 2\cdot var$
+
 Task: compute $S(10^8) \bmod 433494437$.
 
 ---
 
 ## 2. High‑level solution idea
 
-- Replace the variance using the pairwise‑differences identity so the condition becomes one quadratic in the entries.
-- Parameterize the quadruple by nonnegative gaps $u=b-a$, $v=c-b$, $w=d-c$, then switch to symmetric variables
-  $$
-  A=\frac{u+w}{2}, \qquad G=\frac{u-w}{2}, \qquad t=v+A
-  $$
-  which encode the “outer symmetry” and the central gap.
-- For each $(A,t)$, the valid $G$ form a contiguous integer interval cut out by a quadratic inequality and $|G|\le A$.
-- The sum contributed by all $(A,G,t)$ at fixed $(A,t)$ reduces to
-  $$
-  \text{contribution}(A,t) \;=\; 2\big(A^2+t^2\big)\,N \;+\; 2\sum_{G} G^2
-  $$
-  where $N$ is the count of admissible $G$ and $\sum_{G}G^2$ is available in closed form.
-- Accumulate these contributions over the feasible $(A,t)$ domain using only integer arithmetic with modular reduction.
+- **Turn the constraint into one equation.**  
+  Rewrite the “average equals twice the variance” condition using the identity that expresses variance via pairwise differences. This collapses everything to a single quadratic constraint in the four entries.
+
+- **Work with gaps instead of absolute values.**  
+  Describe the quadruple by the three nonnegative gaps between consecutive entries: left, middle, right.  
+  Then re-express these three numbers as:
+  - an **outer size** (the average of the left and right gaps),
+  - an **outer skew** (the difference between the left and right gaps), and
+  - a **central distance** (the middle gap shifted by the outer size).
+  Intuitively: outer size captures symmetry at the ends, outer skew measures imbalance between ends, and central distance tracks the middle spacing.
+
+- **For fixed outer size and central distance, the skew runs over a single block.**  
+  Once the outer size and central distance are fixed, the quadratic constraint restricts the outer skew to a **contiguous range of integers**. There’s also the obvious symmetry limit that the skew cannot exceed the outer size in magnitude. Intersecting these gives a simple lower and upper bound.
+
+- **Compute the contribution at each fixed outer size and central distance.**  
+  Summing all valid quadruples at those fixed values reduces to:
+  - a term that depends only on the outer size and central distance, multiplied by the **count** of allowed skews, plus
+  - the **sum of squared skews** over that contiguous range.  
+  Both the count and the sum of consecutive squares have standard closed forms, so this step is constant-time once the bounds are known.
+
+- **Sweep the feasible domain with integers only.**  
+  Iterate over all allowed pairs of outer size and central distance, derive the skew bounds, add the contribution for that pair, and keep everything reduced modulo the target number. No fractions are needed at any point.
 
 ---
 
@@ -47,81 +57,95 @@ Task: compute $S(10^8) \bmod 433494437$.
 
 ### Variance condition $\Longleftrightarrow$ pairwise squares
 Let $x_1,x_2,x_3,x_4\in\{a,b,c,d\}$ with mean $\mu$. Using
+
 $$
-\sum_{i<j}(x_i-x_j)^2 \;=\; 4\sum_{i=1}^4 (x_i-\mu)^2
+\sum_{i< j} (x_i - x_j)^2 = 4 \sum_{i=1}^4 (x_i - \mu)^2
 $$
+
 the condition $\mu = 2\cdot \mathrm{Var}$ becomes
+
 $$
-\sum_{i<j}(x_i-x_j)^2 \;=\; 2(a+b+c+d)
+\sum_{i< j}(x_i-x_j)^2 = 2(a+b+c+d)
 $$
 
 ### Gap parameterization
 Set $u=b-a$, $v=c-b$, $w=d-c$ (all $\ge 0$). A direct expansion yields
+
 $$
-\sum_{i<j}(x_i-x_j)^2
+\sum_{i< j}(x_i-x_j)^2
 = 3u^2 + 4v^2 + 3w^2 + 4uv + 2uw + 4vw
 $$
-Also $s:=a+b+c+d = 4a+3u+2v+w$. Plugging in gives a linear equation for $a$:
+
+Also definte $s:=a+b+c+d = 4a+3u+2v+w$. Plugging in gives a linear equation for $a$:
+
 $$
-8a \;=\; 3u^2+4v^2+3w^2+4uv+2uw+4vw \;-\; (6u+4v+2w)
+8a = 3u^2+4v^2+3w^2+4uv+2uw+4vw - (6u+4v+2w)
 $$
+
 Therefore $a$ is uniquely determined by $(u,v,w)$, and integrality forces
+
 $$
 u \equiv w \pmod{2}
 $$
 
 ### Symmetric variables
 Define
+
 $$
 A=\frac{u+w}{2}\ (\ge 0),\qquad G=\frac{u-w}{2}\ (\in\mathbb{Z}),\qquad t=v+A\ (\ge A)
 $$
+
 Condition above guarantees $A,G\in\mathbb{Z}$ with $|G|\le A$. Two key simplifications follow:
 
-1. The sum of the quadruple becomes
-   $$
-   s \;=\; a+b+c+d \;=\; 2\big(A^2 + t^2 + G^2\big)
-   $$
+1. The sum of the quadruple becomes $s = a+b+c+d = 2\big(A^2 + t^2 + G^2\big)$
 
-2. The bound $d\le n$ is equivalent to a quadratic window for $G$:
-   $$
-   G(G-1) \;\le\; T(A,t), \qquad T(A,t) := 2n - \big(A^2 + t^2 + A + t\big)
-   $$
+2. The bound $d\le n$ is equivalent to a quadratic window for $G$:$G(G-1) \le T(A,t), \qquad T(A,t) := 2n - \big(A^2 + t^2 + A + t\big)$
 
 Thus, for fixed $(A,t)$, admissible $G$ are the integers with
+
 $$
 |G|\le A \quad\text{and}\quad G(G-1)\le T(A,t)
 $$
 
 ### Closed forms per $(A,t)$
 Let
+
 $$
 U=\left\lfloor\frac{1+\sqrt{1+4T}}{2}\right\rfloor,\qquad
 R=\left\lfloor\frac{\sqrt{1+4T}-1}{2}\right\rfloor \quad(\text{so } U=R+1)
 $$
+
 Then
+
 $$
 L_{\text{pos}}=\min(A,U),\qquad L_{\text{neg}}=\min(A,R)
 $$
+
 and therefore
+
 $$
-N \;=\; 1 + L_{\text{pos}} + L_{\text{neg}}, \qquad
-\sum_{G} G^2 \;=\; \frac{L_{\text{pos}}(L_{\text{pos}}+1)(2L_{\text{pos}}+1)}{6}
-\;+\; \frac{L_{\text{neg}}(L_{\text{neg}}+1)(2L_{\text{neg}}+1)}{6}
+N = 1 + L_{\text{pos}} + L_{\text{neg}}, \qquad \sum_{G} G^2 = \frac{L_{\text{pos}}(L_{\text{pos}}+1)(2L_{\text{pos}}+1)}{6}+ \frac{L_{\text{neg}}(L_{\text{neg}}+1)(2L_{\text{neg}}+1)}{6}
 $$
+
 By the expression for $s$ above, the total contribution from this $(A,t)$ is
+
 $$
-\text{contribution}(A,t)=2\big(A^2+t^2\big)\,N \;+\; 2\sum_{G} G^2
+\text{contribution}(A,t)=2\big(A^2+t^2\big)\,N + 2\sum_{G} G^2
 $$
 
 ### Domain of $(A,t)$ and edge corrections
 From $T(A,t)\ge 0$ we get
+
 $$
 A\ge 0,\qquad t\ge A,\qquad t^2+t \le 2n - (A^2 + A)
 $$
+
 Finally, enforcing $a\ge 1$ eliminates exactly the $a=0$ cases, which occur at
+
 $$
 (A,t,G)\in \{(0,1,0),\ (1,1,0),\ (1,1,1)\}
 $$
+
 (When present, subtract their contributions $2\big(A^2+t^2+G^2\big)$ once.)
 
 ---
