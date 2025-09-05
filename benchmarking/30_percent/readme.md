@@ -52,27 +52,45 @@ minus
 
 ### Potential equals step count
 Let $a$ be the current array and define
-$$P(a)=\sum_{i=0}^{N-1} i\,a_i.$$
-Each allowed move increases $P$ by 1 (calculation above). If $a^*$ is the terminal non‑decreasing configuration, the total number of moves is
-$$B(N)=P(a^*)-P(a).$$
+
+$$
+P(a)=\sum_{i=0}^{N-1} i\,a_i.
+$$
+
+Each allowed move increases $P$ by 1 (calculation above). If $a^{\star}$ is the terminal non‑decreasing configuration, the total number of moves is $B(N)=P(a^{\star})-P(a).$
 
 ### Convex viewpoint via prefix sums
-Define cumulative sums $C(k)=\sum_{i=0}^{k-1} a_i$ for $k=0,1,\dots,N$ with $C(0)=0$. The slopes of $C$ are the $a_i$. Enforcing $a^*$ non‑decreasing is equivalent to requiring **convexity** of the cumulative curve $C^*$. Among all convex $C^*$ that share endpoints $C^*(0)=C(0)=0$, $C^*(N)=C(N)$ and lie below $C$, the **greatest convex minorant (GCM)** maximizes $C^*$ pointwise and yields the isotonic‑regressed slopes $a^*$.
+Define cumulative sums $C(k)=\sum_{i=0}^{k-1} a_i$ for $k=0,1,\dots,N$ with $C(0)=0$. The slopes of $C$ are the $a_i$. Enforcing $a^{\star}$ non‑decreasing is equivalent to requiring **convexity** of the cumulative curve $C^{\star}$. Among all convex $C^{\star}$ that share endpoints $C^{\star}(0)=C(0)=0$, $C^{\star}(N)=C(N)$ and lie below $C$, the **greatest convex minorant (GCM)** maximizes $C^{\star}$ pointwise and yields the isotonic‑regressed slopes $a^{\star}$.
 
 PAVA constructs the GCM in linear time by merging adjacent “violator” blocks. For a final block with length $L$ and total $T$, the real‑valued slope is the average $T/L$.
 
 ### Integer convexification inside a block
 Because beans are integers, on a block of length $L$ and total $T=qL+r$ ($0\le r<L$), the unique maximal integer convex profile under the block’s straight line assigns
-$$\underbrace{q,\dots,q}_{L-r\ \text{terms}},\ \underbrace{q+1,\dots,q+1}_{r\ \text{terms}}.$$
+
+$$
+\underbrace{q,\dots,q}_{L-r\ \text{terms}},\ \underbrace{q+1,\dots,q+1}_{r\ \text{terms}}.
+$$
+
 To maintain global monotonicity, if the last slope of the left block (which is $q+\mathbf{1}_{r>0}$) exceeds the first slope of the right block (which is $\lfloor T'/L' \rfloor$), we merge the blocks and recompute $q, r$. This produces the integer, non‑decreasing $a^*$ consistent with adjacent moves.
 
 ### Computing $P(a^*)$ without expanding elements
 Let a finalized block start at index $s$ with length $L$ and totals $T=qL+r$. Its contribution to $P(a^*)$ is
-$$q \sum_{i=s}^{s+L-1} i \;+\; \sum_{i=s+L-r}^{s+L-1} i,$$
+
+$$
+q \sum_{i=s}^{s+L-1} i \;+\; \sum_{i=s+L-r}^{s+L-1} i,
+$$
+
 using the closed form
-$$\sum_{i=a}^{b} i \;=\; \frac{(b-a+1)(a+b)}{2}.$$
+
+$$
+\sum_{i=a}^{b} i \;=\; \frac{(b-a+1)(a+b)}{2}.
+$$
+
 Summing over blocks gives $P(a^*)$. The initial potential $P(a)=\sum i\,S_i$ is accumulated on the fly while generating $S_i$. Finally,
-$$B(N)=P(a^*)-P(a).$$
+
+$$
+B(N)=P(a^*)-P(a).
+$$
 
 ---
 
